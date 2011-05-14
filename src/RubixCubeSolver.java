@@ -49,9 +49,13 @@ public class RubixCubeSolver {
 
 		while ((line = lineReader.readLine()) != null) {
 			if (conf.matcher(line).matches()) {
-				build(line);
+				if(build(line) == false){
+					System.exit(-1);
+				}
 			}
 		}
+		
+		checkIntegrity();
 
 
 		printCube();
@@ -362,47 +366,6 @@ public class RubixCubeSolver {
 		return true;
 	}
 
-	// print a side
-	private static void printBlue() {
-		logln("blue: ");
-		print(blue);
-	}
-
-	private static void printGreen() {
-		logln("green: ");
-		print(green);
-	}
-
-	private static void printRed() {
-		logln("red: ");
-		print(red);
-	}
-
-	private static void printOrange() {
-		logln("orange: ");
-		print(orange);
-	}
-
-	private static void printYellow() {
-		logln("yellow: ");
-		print(yellow);
-	}
-
-	private static void printWhite() {
-		logln("white: ");
-		print(white);
-	}
-
-	private static void printEverything() {
-		logln("print EVERYTHING: ");
-		printBlue();
-		printGreen();
-		printRed();
-		printOrange();
-		printYellow();
-		printWhite();
-		logln();
-	}
 
 	private static void printCube(){
 		log(cubeToString());
@@ -486,6 +449,29 @@ public class RubixCubeSolver {
 	private static void log(String s){
 		if (stdout)
 			System.out.print(s);
+	}
+	
+	private static void checkIntegrity(){
+		boolean valid = validFace(blue) && validFace(yellow) && validFace(green) && validFace(white) && validFace(red) && validFace(orange);
+		if(!valid){
+			log("Bad face.\n");
+			System.exit(-1);
+		}
+	}
+	
+	private static boolean validFace(char[][] face){
+		for (int r = 0; r < 3; r++) {
+			for (int c = 0; c < 3; c++) {
+				if (!goodColor(face[r][c]))
+					return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private static boolean goodColor(char c){
+		return c == 'r' | c == 'g' | c == 'b' | c == 'o' | c == 'y' | c == 'w';
 	}
 	
 
