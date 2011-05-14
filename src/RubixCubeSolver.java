@@ -12,7 +12,7 @@ public class RubixCubeSolver {
 	// flags
 	private static boolean stdout = true;
 	private static boolean traceSolution = true;
-	
+
 	private static String cF = ".*:.*";
 	private static Pattern conf = Pattern.compile(cF, Pattern.CASE_INSENSITIVE);
 
@@ -23,10 +23,7 @@ public class RubixCubeSolver {
 	private static char[][] red = new char[3][3]; // red is left
 	private static char[][] orange = new char[3][3]; // orange is right
 
-	
 	private static int turn = 0;
-	
-	
 
 	public static void main(String[] args) throws Exception {
 
@@ -49,24 +46,42 @@ public class RubixCubeSolver {
 
 		while ((line = lineReader.readLine()) != null) {
 			if (conf.matcher(line).matches()) {
-				if(build(line) == false){
+				if (build(line) == false) {
 					System.exit(-1);
 				}
 			}
 		}
-		
+
 		checkIntegrity();
 
-
 		printCube();
-		
-		for(int i = 0; i < 6; i++){
-			turnOrange(false);
-			turnGreen(false);
-			turnOrange(true);
-			turnGreen(true);
+		boolean t = true;
+		boolean f = false;
+
+		boolean right = true;
+
+		for (int i = 0; i < 6; i++) {
+			
+			if (!right) {
+				turnRed(t);
+				turnGreen(t);
+				turnRed(f);
+				turnGreen(f);
+			} else {
+				turnOrange(f);
+				turnGreen(f);
+				turnOrange(t);
+				turnGreen(t);
+			}
 		}
-		
+
+		print(blue);
+		print(yellow);
+		print(orange);
+		print(green);
+		print(white);
+		print(red);
+
 	}
 
 	private static void turnYellow(boolean clockWise) {
@@ -78,12 +93,12 @@ public class RubixCubeSolver {
 
 		if (clockWise) {
 			turnFaceClock(yellow);
-			replaceColor(redc, blue, "bottom");
+			replaceColorR(redc, blue, "bottom");
 			replaceColor(bluec, orange, "left");
-			replaceColor(orangec, green, "top");
+			replaceColorR(orangec, green, "top");
 			replaceColor(greenc, red, "right");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning yellow clockwise");
 				printCube();
 			}
@@ -91,11 +106,12 @@ public class RubixCubeSolver {
 		} else {
 			turnFaceCounterClock(yellow);
 			replaceColor(orangec, blue, "bottom");
-			replaceColor(greenc, orange, "left");
+			replaceColorR(greenc, orange, "left");
 			replaceColor(redc, green, "top");
-			replaceColor(bluec, red, "right");
-			if (traceSolution){
-				logln("Turn " + ++turn + "\nturning yellow counter clockwise \n");
+			replaceColorR(bluec, red, "right");
+			if (traceSolution) {
+				logln("Turn " + ++turn
+						+ "\nturning yellow counter clockwise \n");
 				printCube();
 			}
 
@@ -117,7 +133,7 @@ public class RubixCubeSolver {
 			replaceColor(orangec, yellow, "top");
 			replaceColor(yellowc, red, "top");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning blue clockwise");
 				printCube();
 			}
@@ -129,7 +145,7 @@ public class RubixCubeSolver {
 			replaceColor(redc, yellow, "top");
 			replaceColor(whitec, red, "top");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning blue counter clockwise \n");
 				printCube();
 			}
@@ -140,32 +156,55 @@ public class RubixCubeSolver {
 	private static void turnOrange(boolean clockWise) {
 
 		char[] bluec = deepCopy(blue, "right");
-		char[] whitec = deepCopy(white, "right");
+		char[] whitec = deepCopy(white, "left");
 		char[] yellowc = deepCopy(yellow, "right");
-		char[] greenc = deepCopy(green, "left");
+		char[] greenc = deepCopy(green, "right");
+
+		for (int i = 0; i < greenc.length; i++) {
+			System.out.println(whitec[i]);
+		}
 
 		if (clockWise) {
 			turnFaceClock(orange);
 			replaceColor(yellowc, blue, "right");
-			replaceColor(bluec, white, "left");
-			replaceColor(whitec, green, "right");
+			replaceColorR(bluec, white, "left");
+			replaceColorR(whitec, green, "right");
 			replaceColor(greenc, yellow, "right");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning orange clockwise \n");
 				printCube();
 			}
 
 		} else {
 			turnFaceCounterClock(orange);
-			replaceColor(whitec, blue, "right");
-			replaceColor(greenc, white, "left");
+			replaceColorR(whitec, blue, "right");
+			replaceColorR(greenc, white, "left");
 			replaceColor(yellowc, green, "right");
 			replaceColor(bluec, yellow, "right");
 
-			if (traceSolution){
-				logln("Turn " + ++turn + "\nturning orange counter clockwise \n");
+			if (traceSolution) {
+				logln("Turn " + ++turn
+						+ "\nturning orange counter clockwise \n");
 				printCube();
+			}
+		}
+
+	}
+
+	private static void replaceColorR(char[] source, char[][] target,
+			String side) {
+		for (int i = 0; i < 3; i++) {
+			if (side.equals("top"))
+				target[0][2 - i] = source[i];
+			else if (side.equals("bottom")) {
+				target[2][2 - i] = source[i];
+			} else if (side.equals("left")) {
+				target[2 - i][0] = source[i];
+			} else if (side.equals("right")) {
+				target[2 - i][2] = source[i];
+			} else {
+				logln("error determining side (replaceColor)");
 			}
 		}
 
@@ -181,23 +220,23 @@ public class RubixCubeSolver {
 		if (clockWise) {
 			turnFaceClock(white);
 			replaceColor(orangec, blue, "top");
-			replaceColor(bluec, red, "left");
+			replaceColorR(bluec, red, "left");
 			replaceColor(redc, green, "bottom");
-			replaceColor(greenc, orange, "right");
+			replaceColorR(greenc, orange, "right");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning white clockwise \n");
 				printCube();
 			}
 
 		} else {
 			turnFaceCounterClock(white);
-			replaceColor(redc, blue, "top");
+			replaceColorR(redc, blue, "top");
 			replaceColor(greenc, red, "left");
-			replaceColor(orangec, green, "bottom");
+			replaceColorR(orangec, green, "bottom");
 			replaceColor(bluec, orange, "right");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning white counter clockwise \n");
 				printCube();
 			}
@@ -219,7 +258,7 @@ public class RubixCubeSolver {
 			replaceColor(orangec, white, "bottom");
 			replaceColor(whitec, red, "bottom");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning green clockwise \n");
 				printCube();
 			}
@@ -231,7 +270,7 @@ public class RubixCubeSolver {
 			replaceColor(redc, white, "bottom");
 			replaceColor(yellowc, red, "bottom");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning green counter clockwise \n");
 				printCube();
 			}
@@ -248,12 +287,12 @@ public class RubixCubeSolver {
 
 		if (clockWise) {
 			turnFaceClock(green);
-			replaceColor(whitec, blue, "left");
+			replaceColorR(whitec, blue, "left");
 			replaceColor(bluec, yellow, "left");
 			replaceColor(yellowc, green, "left");
-			replaceColor(greenc, white, "right");
+			replaceColorR(greenc, white, "right");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning green clockwise \n");
 				printCube();
 			}
@@ -261,11 +300,11 @@ public class RubixCubeSolver {
 		} else {
 			turnFaceCounterClock(green);
 			replaceColor(yellowc, blue, "left");
-			replaceColor(bluec, white, "right");
+			replaceColorR(bluec, white, "right");
 			replaceColor(greenc, yellow, "left");
-			replaceColor(whitec, green, "left");
+			replaceColorR(whitec, green, "left");
 
-			if (traceSolution){
+			if (traceSolution) {
 				logln("Turn " + ++turn + "\nturning green counter clockwise \n");
 				printCube();
 			}
@@ -366,7 +405,7 @@ public class RubixCubeSolver {
 		logln(temp + ": " + colors);
 
 		boolean result = true;
-		
+
 		if (temp.equals("yellow")) {
 			result = buildFace(yellow, colors, temp);
 		} else if (temp.equals("white")) {
@@ -389,12 +428,11 @@ public class RubixCubeSolver {
 	// build each face.
 	private static boolean buildFace(char[][] face, String colors, String color) {
 
-		if (face[0][0] != 0){
+		if (face[0][0] != 0) {
 			logln("Already built \"" + color + "\" face");
 			return false;
 		}
-		
-		
+
 		int ch = 0;
 
 		for (int r = 0; r < 3; r++) {
@@ -407,8 +445,7 @@ public class RubixCubeSolver {
 		return true;
 	}
 
-
-	private static void printCube(){
+	private static void printCube() {
 		log(cubeToString());
 	}
 
@@ -417,14 +454,15 @@ public class RubixCubeSolver {
 
 		String blank = "      \n      \n      \n";
 		result.append(interleave(blank, faceToString(blue)));
-		result.append(interleave(interleave(faceToString(red), faceToString(yellow)), faceToString(orange)));
+		result.append(interleave(interleave(faceToString(red),
+				faceToString(yellow)), faceToString(orange)));
 		result.append(interleave(blank, faceToString(green)));
 		result.append(interleave(blank, faceToString(white, true)));
 		return result.toString();
-		
+
 	}
 
-	private static String faceToString(char[][] face){
+	private static String faceToString(char[][] face) {
 		StringBuffer result = new StringBuffer();
 		for (int r = 0; r < 3; r++) {
 			for (int c = 0; c < 3; c++) {
@@ -435,40 +473,41 @@ public class RubixCubeSolver {
 		}
 		return result.toString();
 	}
-	
-	private static String faceToString(char[][] face, boolean upsideDown){
+
+	private static String faceToString(char[][] face, boolean upsideDown) {
 		if (upsideDown = false)
 			return faceToString(face);
 		char[][] newFace = deepCopyFace(face);
-		char temp = newFace[0][1];
-		newFace[0][1] = newFace[0][2];
-		newFace[0][2] = temp;
-		
-		for(int i = 0; i < 3; i++){
+		char temp = newFace[1][0];
+		newFace[1][0] = newFace[1][2];
+		newFace[1][2] = temp;
+
+		for (int i = 0; i < 3; i++) {
 			temp = newFace[0][i];
-			newFace[0][i] = newFace[2][2-i];
-			newFace[2][2-i] = temp;
+			newFace[0][i] = newFace[2][2 - i];
+			newFace[2][2 - i] = temp;
 		}
-		
+
 		return faceToString(newFace);
-		
+
 	}
-	
-	private static String interleave(String x, String y){
+
+	private static String interleave(String x, String y) {
 		String[] xtokens = x.split("\n");
 		String[] ytokens = y.split("\n");
-		
-		int max = xtokens.length > ytokens.length ? xtokens.length : ytokens.length;
-		
+
+		int max = xtokens.length > ytokens.length ? xtokens.length
+				: ytokens.length;
+
 		StringBuffer result = new StringBuffer();
-		
-		for(int i = 0; i < max; i++){
+
+		for (int i = 0; i < max; i++) {
 			result.append(xtokens[i] + ytokens[i] + "\n");
 		}
-		
+
 		return result.toString();
 	}
-	
+
 	private static void print(char[][] face) {
 		for (int r = 0; r < 3; r++) {
 			for (int c = 0; c < 3; c++) {
@@ -478,42 +517,43 @@ public class RubixCubeSolver {
 		}
 
 	}
-	
-	private static void logln(){
+
+	private static void logln() {
 		log("\n");
 	}
-	
-	private static void logln(String s){
+
+	private static void logln(String s) {
 		log(s + "\n");
 	}
-	
-	private static void log(String s){
+
+	private static void log(String s) {
 		if (stdout)
 			System.out.print(s);
 	}
-	
-	private static void checkIntegrity(){
-		boolean valid = validFace(blue) && validFace(yellow) && validFace(green) && validFace(white) && validFace(red) && validFace(orange);
-		if(!valid){
+
+	private static void checkIntegrity() {
+		boolean valid = validFace(blue) && validFace(yellow)
+				&& validFace(green) && validFace(white) && validFace(red)
+				&& validFace(orange);
+		if (!valid) {
 			log("Bad face.\n");
 			System.exit(-1);
 		}
 	}
-	
-	private static boolean validFace(char[][] face){
+
+	private static boolean validFace(char[][] face) {
 		for (int r = 0; r < 3; r++) {
 			for (int c = 0; c < 3; c++) {
 				if (!goodColor(face[r][c]))
 					return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
-	private static boolean goodColor(char c){
+
+	private static boolean goodColor(char c) {
 		return c == 'r' | c == 'g' | c == 'b' | c == 'o' | c == 'y' | c == 'w';
 	}
-	
 
 }
