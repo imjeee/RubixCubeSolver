@@ -11,7 +11,7 @@ public class RubixCubeSolver {
 
 	// flags
 	private static boolean stdout = true;
-	
+	private static boolean traceSolution = true;
 	
 	private static String cF = ".*:.*";
 	private static Pattern conf = Pattern.compile(cF, Pattern.CASE_INSENSITIVE);
@@ -24,7 +24,7 @@ public class RubixCubeSolver {
 	private static char[][] orange = new char[3][3]; // orange is right
 
 	
-	
+	private static int turn = 0;
 	
 	
 
@@ -59,9 +59,14 @@ public class RubixCubeSolver {
 
 
 		printCube();
-		logln("turning yellow clockwise");
-		turnYellow(true);
-		printCube();
+		
+		for(int i = 0; i < 6; i++){
+			turnOrange(false);
+			turnGreen(false);
+			turnOrange(true);
+			turnGreen(true);
+		}
+		
 	}
 
 	private static void turnYellow(boolean clockWise) {
@@ -78,7 +83,10 @@ public class RubixCubeSolver {
 			replaceColor(orangec, green, "top");
 			replaceColor(greenc, red, "right");
 
-			logln("turn yellow clockwise");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning yellow clockwise");
+				printCube();
+			}
 
 		} else {
 			turnFaceCounterClock(yellow);
@@ -86,7 +94,10 @@ public class RubixCubeSolver {
 			replaceColor(greenc, orange, "left");
 			replaceColor(redc, green, "top");
 			replaceColor(bluec, red, "right");
-			logln("turn yellow counter clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning yellow counter clockwise \n");
+				printCube();
+			}
 
 		}
 
@@ -106,7 +117,10 @@ public class RubixCubeSolver {
 			replaceColor(orangec, yellow, "top");
 			replaceColor(yellowc, red, "top");
 
-			logln("turn blue clockwise");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning blue clockwise");
+				printCube();
+			}
 
 		} else {
 			turnFaceCounterClock(blue);
@@ -115,7 +129,10 @@ public class RubixCubeSolver {
 			replaceColor(redc, yellow, "top");
 			replaceColor(whitec, red, "top");
 
-			logln("turn blue counter clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning blue counter clockwise \n");
+				printCube();
+			}
 		}
 
 	}
@@ -134,7 +151,10 @@ public class RubixCubeSolver {
 			replaceColor(whitec, green, "right");
 			replaceColor(greenc, yellow, "right");
 
-			logln("turn orange clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning orange clockwise \n");
+				printCube();
+			}
 
 		} else {
 			turnFaceCounterClock(orange);
@@ -143,7 +163,10 @@ public class RubixCubeSolver {
 			replaceColor(yellowc, green, "right");
 			replaceColor(bluec, yellow, "right");
 
-			logln("turn orange counter clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning orange counter clockwise \n");
+				printCube();
+			}
 		}
 
 	}
@@ -162,7 +185,10 @@ public class RubixCubeSolver {
 			replaceColor(redc, green, "bottom");
 			replaceColor(greenc, orange, "right");
 
-			logln("turn white clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning white clockwise \n");
+				printCube();
+			}
 
 		} else {
 			turnFaceCounterClock(white);
@@ -171,7 +197,10 @@ public class RubixCubeSolver {
 			replaceColor(orangec, green, "bottom");
 			replaceColor(bluec, orange, "right");
 
-			logln("turn white counter clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning white counter clockwise \n");
+				printCube();
+			}
 		}
 
 	}
@@ -190,7 +219,10 @@ public class RubixCubeSolver {
 			replaceColor(orangec, white, "bottom");
 			replaceColor(whitec, red, "bottom");
 
-			logln("turn green clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning green clockwise \n");
+				printCube();
+			}
 
 		} else {
 			turnFaceCounterClock(green);
@@ -199,7 +231,10 @@ public class RubixCubeSolver {
 			replaceColor(redc, white, "bottom");
 			replaceColor(yellowc, red, "bottom");
 
-			logln("turn green counter clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning green counter clockwise \n");
+				printCube();
+			}
 		}
 
 	}
@@ -218,7 +253,10 @@ public class RubixCubeSolver {
 			replaceColor(yellowc, green, "left");
 			replaceColor(greenc, white, "right");
 
-			logln("turn green clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning green clockwise \n");
+				printCube();
+			}
 
 		} else {
 			turnFaceCounterClock(green);
@@ -227,7 +265,10 @@ public class RubixCubeSolver {
 			replaceColor(greenc, yellow, "left");
 			replaceColor(whitec, green, "left");
 
-			logln("turn green counter clockwise \n");
+			if (traceSolution){
+				logln("Turn " + ++turn + "\nturning green counter clockwise \n");
+				printCube();
+			}
 		}
 
 	}
