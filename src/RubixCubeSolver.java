@@ -68,19 +68,13 @@ public class RubixCubeSolver {
 				turnRed(f);
 				turnGreen(f);
 			} else {
-				turnOrange(f);
-				turnGreen(f);
-				turnOrange(t);
-				turnGreen(t);
+				turnWhite(f);
+				turnRed(f);
+				turnWhite(t);
+				turnRed(t);
 			}
 		}
 
-		print(blue);
-		print(yellow);
-		print(orange);
-		print(green);
-		print(white);
-		print(red);
 
 	}
 
@@ -110,8 +104,7 @@ public class RubixCubeSolver {
 			replaceColor(redc, green, "top");
 			replaceColorR(bluec, red, "right");
 			if (traceSolution) {
-				logln("Turn " + ++turn
-						+ "\nturning yellow counter clockwise \n");
+				logln("Turn " + ++turn + "\nturning yellow counter clockwise \n");
 				printCube();
 			}
 
@@ -160,9 +153,6 @@ public class RubixCubeSolver {
 		char[] yellowc = deepCopy(yellow, "right");
 		char[] greenc = deepCopy(green, "right");
 
-		for (int i = 0; i < greenc.length; i++) {
-			System.out.println(whitec[i]);
-		}
 
 		if (clockWise) {
 			turnFaceClock(orange);
@@ -184,8 +174,7 @@ public class RubixCubeSolver {
 			replaceColor(bluec, yellow, "right");
 
 			if (traceSolution) {
-				logln("Turn " + ++turn
-						+ "\nturning orange counter clockwise \n");
+				logln("Turn " + ++turn + "\nturning orange counter clockwise \n");
 				printCube();
 			}
 		}
@@ -286,26 +275,26 @@ public class RubixCubeSolver {
 		char[] whitec = deepCopy(white, "right");
 
 		if (clockWise) {
-			turnFaceClock(green);
+			turnFaceClock(red);
 			replaceColorR(whitec, blue, "left");
 			replaceColor(bluec, yellow, "left");
 			replaceColor(yellowc, green, "left");
 			replaceColorR(greenc, white, "right");
 
 			if (traceSolution) {
-				logln("Turn " + ++turn + "\nturning green clockwise \n");
+				logln("Turn " + ++turn + "\nturning red clockwise \n");
 				printCube();
 			}
 
 		} else {
-			turnFaceCounterClock(green);
+			turnFaceCounterClock(red);
 			replaceColor(yellowc, blue, "left");
 			replaceColorR(bluec, white, "right");
 			replaceColor(greenc, yellow, "left");
 			replaceColorR(whitec, green, "left");
 
 			if (traceSolution) {
-				logln("Turn " + ++turn + "\nturning green counter clockwise \n");
+				logln("Turn " + ++turn + "\nturning red counter clockwise \n");
 				printCube();
 			}
 		}
@@ -454,8 +443,7 @@ public class RubixCubeSolver {
 
 		String blank = "      \n      \n      \n";
 		result.append(interleave(blank, faceToString(blue)));
-		result.append(interleave(interleave(faceToString(red),
-				faceToString(yellow)), faceToString(orange)));
+		result.append(interleave(interleave(faceToString(red), faceToString(yellow)), faceToString(orange)));
 		result.append(interleave(blank, faceToString(green)));
 		result.append(interleave(blank, faceToString(white, true)));
 		return result.toString();
