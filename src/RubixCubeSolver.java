@@ -24,6 +24,10 @@ public class RubixCubeSolver {
 
 		Cube cube = new Cube();
 		cube.addOutputStream(System.out);
+		cube.enableTurnLog();
+		cube.enableCubeLog();
+		cube.enableCubeRandomizeLog();
+		cube.enableRandomizeLog();
 		
 		if (args.length != 1) {
 			System.out.println("usage: RubixCubeSolver <configuration file>");
