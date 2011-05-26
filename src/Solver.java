@@ -1,6 +1,8 @@
 
 public class Solver {
 	
+	// F = front B = back L = left R = right U = up D = down
+	// p = plus m = minus
 	private static final int Fp = 0, Bp = 1, Lp = 2, Rp = 3, Up = 4, Dp = 5, Fm = 6, Bm = 7, Lm = 8, Rm = 9, Um = 10, Dm = 11;
 	
 	private static final char b = 'b', w = 'w', y = 'y', r = 'r', o = 'o', g = 'g';
@@ -43,33 +45,38 @@ public class Solver {
 		 * if a side position is impossible, or already in the correct position, leave the move list empty
 		 * 
 		 * Use turn/move constants defined at the top of this file
+		 * 
+		 * 
+		 * bw means that the first color of the side piece was found on the blue face
+		 * and the second color of the side piece was found on the white face
+		 * so order does matter when you do cube.findSide(color1, color2)
 		 */
 		
 		int[][] topMidBlue = {
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{},
-				{}
+				{}, // bw
+				{}, // br
+				{}, // by
+				{}, // bo
+				{}, // yb
+				{}, // yr
+				{}, // yg
+				{}, // yo
+				{}, // ob
+				{}, // oy
+				{}, // og
+				{}, // ow
+				{}, // wb
+				{}, // wo
+				{}, // wg
+				{}, // wr
+				{}, // rb
+				{}, // rw
+				{}, // rg
+				{}, // ry
+				{}, // gy
+				{}, // gr
+				{}, // gw
+				{}  // go
 		};
 		
 		cube.performMoves(topMidBlue[cube.findSide(b, w)]);
