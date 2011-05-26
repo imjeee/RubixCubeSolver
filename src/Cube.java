@@ -11,6 +11,7 @@ public class Cube {
 	
 	private LinkedList<Integer> moves = new LinkedList<Integer>();
 	
+	public static final int y = 0, w = 1, b = 2, g = 3, r = 4, o = 5;
 	
 	private char[][] yellow = new char[3][3]; // yellow is front
 	private char[][] white = new char[3][3]; // white is back
@@ -610,6 +611,138 @@ public class Cube {
 	public void resetMoves(){
 		turnCount = 0;
 		moves = new LinkedList<Integer>();
+	}
+	
+	public int topMid(char[][] face){
+		return face[0][1];
+	}
+	
+	public int leftMid(char[][] face){
+		return face[1][0];
+	}
+	
+	public int rightMid(char[][] face){
+		return face[1][2];
+	}
+	
+	public int bottomMid(char[][] face){
+		return face[2][1];
+	}
+	
+	public int findSide(char c1, char c2){
+		if (topMid(blue) == c1 && topMid(white) == c2)
+			return 0;
+		else if (leftMid(blue) == c1 && topMid(red) == c2)
+			return 1;
+		else if (bottomMid(blue) == c1 && topMid(yellow) == c2)
+			return 2;
+		else if (rightMid(blue) == c1 && topMid(orange) == c2)
+			return 3;
+		
+		else if (topMid(yellow) == c1 && bottomMid(blue) == c2)
+			return 4;
+		else if (leftMid(yellow) == c1 && rightMid(red) == c2)
+			return 5;
+		else if (bottomMid(yellow) == c1 && topMid(green) == c2)
+			return 6;
+		else if (rightMid(yellow) == c1 && leftMid(orange) == c2)
+			return 7;
+		
+		else if (topMid(orange) == c1 && rightMid(blue) == c2)
+			return 8;
+		else if (leftMid(orange) == c1 && rightMid(yellow) == c2)
+			return 9;
+		else if (bottomMid(orange) == c1 && rightMid(green) == c2)
+			return 10;
+		else if (rightMid(orange) == c1 && leftMid(white) == c2)
+			return 11;
+		
+		else if (topMid(white) == c1 && topMid(blue) == c2)
+			return 12;
+		else if (leftMid(white) == c1 && rightMid(orange) == c2)
+			return 13;
+		else if (bottomMid(white) == c1 && bottomMid(green) == c2)
+			return 14;
+		else if (rightMid(white) == c1 && leftMid(red) == c2)
+			return 15;
+		
+		else if (topMid(red) == c1 && leftMid(blue) == c2)
+			return 16;
+		else if (leftMid(red) == c1 && rightMid(white) == c2)
+			return 17;
+		else if (bottomMid(red) == c1 && leftMid(green) == c2)
+			return 18;
+		else if (rightMid(red) == c1 && leftMid(yellow) == c2)
+			return 19;
+		
+		else if (topMid(green) == c1 && bottomMid(yellow) == c2)
+			return 20;
+		else if (leftMid(green) == c1 && bottomMid(red) == c2)
+			return 21;
+		else if (bottomMid(green) == c1 && bottomMid(white) == c2)
+			return 22;
+		else if (rightMid(green) == c1 && bottomMid(orange) == c2)
+			return 23;
+		
+		else {
+			errLog.println("Side doesn't exist: " + c1 + " and " + c2);
+			System.exit(-1);
+			return 0;
+		}
+		
+		
+	}
+
+	public void performMoves(int[] moves) {
+		try{
+			for(int i : moves){
+				switch(i){
+					case 0:
+						turnYellow(true);
+						break;
+					case 1:
+						turnWhite(true);
+						break;
+					case 2:
+						turnRed(true);
+						break;
+					case 3:
+						turnOrange(true);
+						break;
+					case 4:
+						turnBlue(true);
+						break;
+					case 5:
+						turnGreen(true);
+						break;
+					case 6:
+						turnYellow(false);
+						break;
+					case 7:
+						turnWhite(false);
+						break;
+					case 8:
+						turnRed(false);
+						break;
+					case 9:
+						turnOrange(false);
+						break;
+					case 10:
+						turnBlue(false);
+						break;
+					case 11:
+						turnGreen(false);
+						break;
+					default:
+						errLog.println("Invalid move number: " + i);
+						System.exit(-1);
+						
+				}
+			}
+		} catch (Exception e){
+			errLog.println(e.toString());
+			System.exit(-1);
+		}
 	}
 	
 	

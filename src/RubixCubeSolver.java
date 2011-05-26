@@ -54,56 +54,13 @@ public class RubixCubeSolver {
 
 		cube.checkIntegrity();
 
-		cube.printCube();
-		/*boolean t = true;
-		boolean f = false;
 
-		int side = 3;
-
-		for (int i = 0; i < 6; i++) {
-			
-			switch (side) {
-				case 0:
-					cube.turnRed(t);
-					cube.turnGreen(t);
-					cube.turnRed(f);
-					cube.turnGreen(f);
-					break;
-				case 1:
-					cube.turnWhite(f);
-					cube.turnRed(f);
-					cube.turnWhite(t);
-					cube.turnRed(t);
-					break;
-				case 2:
-					cube.turnBlue(f);
-					cube.turnYellow(f);
-					cube.turnBlue(t);
-					cube.turnYellow(t);
-					break;
-				case 3:
-					cube.turnOrange(f);
-					cube.turnYellow(f);
-					cube.turnOrange(t);
-					cube.turnYellow(t);
-					break;
-			}
-		}
-		cube.printCube();
-		System.out.println("Moves: ");
-		cube.printMoves();
-		System.out.println("Moves Backwards: ");
-		cube.printMovesBackwards();
-		
-		cube.resetMoves();
-		*/
 		System.out.println("Scrambling...");
 		cube.scramble();
-		System.out.println("Moves: ");
-		cube.printMoves();
-		System.out.println("Moves Backwards: ");
-		cube.printMovesBackwards();
 		cube.printCube();
+		
+		Solver sol = new Solver(cube);
+		sol.solve();
 
 
 	}
