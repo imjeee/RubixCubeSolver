@@ -745,6 +745,17 @@ public class Cube {
 		}
 	}
 	
+	public boolean topSolved(){
+		return topCrossSolved() && topCornersSolved();
+	}
+	
+	public boolean topCornersSolved(){
+		return topRight(blue) == 'b' && topRight(orange) == 'o' && topLeft(white) == 'w'
+			&& topLeft(blue) == 'b' && topRight(white) == 'w' && topLeft(red) == 'r'
+			&& bottomLeft(blue) == 'b' && topRight(red) == 'r' && topLeft(yellow) == 'y'
+			&& bottomRight(blue) == 'b' && topRight(yellow) == 'y' && topLeft(orange) == 'o';
+	}
+	
 	public boolean topCrossSolved(){
 		return topMid(red) == 'r' && topMid(white) == 'w' && topMid(yellow) == 'y' && topMid(orange) == 'o' 
 			&& topMid(blue) == 'b' && leftMid(blue) == 'b' && rightMid(blue) == 'b' && bottomMid(blue) == 'b';
@@ -818,11 +829,8 @@ public class Cube {
 	
 	
 	public boolean blueCornerOriented(char c1, char c2){
-		return ((translateColor(topRight(yellow)) & translateColor(topLeft(orange))) == (translateColor(c1) & translateColor(c2))) && bottomLeft(blue) == 'b';
+		return ((translateColor(topRight(yellow)) & translateColor(topLeft(orange))) == (translateColor(c1) & translateColor(c2))) && bottomRight(blue) == 'b';
 	}
 	
-	public boolean rightCornerIsBlue(){
-		return blue[2][2] == 'b';
-	}
 	
 }

@@ -64,15 +64,15 @@ public class RubixCubeSolver {
 			Solver sol = new Solver(cube);
 			sol.solve();
 			cube.printCube();
-			if (!cube.topCrossSolved())
+			if (!cube.topSolved())
 				break;
 			totalTurns += cube.getTurnCount();
 		}
-		if (!cube.topCrossSolved()){
+		if (!cube.topSolved()){
 			System.out.println("Failed to solve!");
 		} else {
 			System.out.println("Finished! No problems.");
-			System.out.println("Average amt. of turns to solve the top cross: " + totalTurns/scrambles);
+			System.out.println("Average amt. of turns to solve the top: " + totalTurns/scrambles);
 		}
 
 

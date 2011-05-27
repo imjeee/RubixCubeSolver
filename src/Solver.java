@@ -127,7 +127,7 @@ public class Solver {
 	
 	private void bruteForceOrientation(char c1,char c2) {
 		int[] moves = {om,gm,op,gp};
-		while(!cube.rightCornerIsBlue()){
+		while(!cube.blueCornerOriented(c1, c2)){
 			cube.performMoves(moves);
 		}
 	}
