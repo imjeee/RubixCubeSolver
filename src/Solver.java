@@ -55,14 +55,14 @@ public class Solver {
 		
 		int[][] topMidBlue = {
 				{wp,wp,gp,gp,yp,yp}, // bw
-				{rp,rp,rp,yp,yp}, // br
+				{rp,rp,gp,yp,yp}, // br
 				{}, // by
 				{op,op,gm,yp,yp}, // bo
 				
-				{yp,yp,gp,op,yp,om}, // yb
-				{ym,gp,op,yp,om}, // yr
-				{gp,op,yp,om}, // yg
-				{yp,gp,op,yp,om}, // yo
+				{yp,yp,gp,op,ym,om}, // yb
+				{ym,gp,op,ym,om}, // yr
+				{gp,op,ym,om}, // yg
+				{yp,gp,op,ym,om}, // yo
 				
 				{om,ym}, // ob
 				{ym}, // oy
