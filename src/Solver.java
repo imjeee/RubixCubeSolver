@@ -93,7 +93,7 @@ public class Solver {
 		cube.turnBlue(true);
 		cube.performMoves(topMidBlue[cube.findSide(b, r)]);
 		cube.turnBlue(true);
-		System.out.println("Done with the cross");
+		//System.out.println("Done with the cross");
 		
 		
 	}
@@ -118,9 +118,7 @@ public class Solver {
 			cube.performMoves(topMidBlue[cube.findCorner(b,c1[i],c2[i])]);
 			bruteForceOrientation(c1[i],c2[i]);
 			cube.turnBlue(true);
-		}
-		//bruteForce2();
-		
+		}		
 	}
 	
 	

@@ -57,13 +57,13 @@ public class RubixCubeSolver {
 		long totalTurns = 0;
 		int scrambles = 1000;
 		for(int i = 0; i < scrambles; i++){
-			System.out.println("Scrambling...");
+			//System.out.println("Scrambling...");
 			cube.scramble();
-			cube.printCube();
-			System.out.println("Solving...");
+			//cube.printCube();
+			//System.out.println("Solving...");
 			Solver sol = new Solver(cube);
 			sol.solve();
-			cube.printCube();
+			//cube.printCube();
 			if (!cube.topSolved())
 				break;
 			totalTurns += cube.getTurnCount();

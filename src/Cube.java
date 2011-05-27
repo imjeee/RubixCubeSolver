@@ -51,7 +51,6 @@ public class Cube {
 			replaceColor(greenc, red, "right");
 
 			turnLog.println("Turn " + ++turnCount + "\nturning yellow clockwise");
-			cubeLog.println(cubeToString());
 
 		} else {
 			turnFaceCounterClock(yellow);
@@ -60,10 +59,9 @@ public class Cube {
 			replaceColor(redc, green, "top");
 			replaceColorR(bluec, red, "right");
 			turnLog.println("Turn " + ++turnCount+ "\nturning yellow counter clockwise \n");
-			cubeLog.println(cubeToString());
 
 		}
-		
+		cubeLog.println(cubeToString());
 		moves.add(colorNum + (clockWise ? 0 : 6));
 
 	}
@@ -85,7 +83,6 @@ public class Cube {
 			replaceColor(yellowc, red, "top");
 
 			turnLog.println("Turn " + ++turnCount + "\nturning blue clockwise");
-			cubeLog.println(cubeToString());
 
 		} else {
 			turnFaceCounterClock(blue);
@@ -95,9 +92,8 @@ public class Cube {
 			replaceColor(whitec, red, "top");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning blue counter clockwise \n");
-			cubeLog.println(cubeToString());
 		}
-
+		cubeLog.println(cubeToString());
 		moves.add(colorNum + (clockWise ? 0 : 6));
 
 	}
@@ -120,7 +116,6 @@ public class Cube {
 			replaceColor(greenc, yellow, "right");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning orange clockwise \n");
-			cubeLog.println(cubeToString());
 
 		} else {
 			turnFaceCounterClock(orange);
@@ -130,9 +125,8 @@ public class Cube {
 			replaceColor(bluec, yellow, "right");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning orange counter clockwise \n");
-			cubeLog.println(cubeToString());
 		}
-
+		cubeLog.println(cubeToString());
 		moves.add(colorNum + (clockWise ? 0 : 6));
 	}
 	
@@ -153,7 +147,6 @@ public class Cube {
 			replaceColorR(greenc, orange, "right");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning white clockwise \n");
-			cubeLog.println(cubeToString());
 
 		} else {
 			turnFaceCounterClock(white);
@@ -163,9 +156,8 @@ public class Cube {
 			replaceColor(bluec, orange, "right");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning white counter clockwise \n");
-			cubeLog.println(cubeToString());
 		}
-		
+		cubeLog.println(cubeToString());
 		moves.add(colorNum + (clockWise ? 0 : 6));
 
 	}
@@ -187,7 +179,6 @@ public class Cube {
 			replaceColor(whitec, red, "bottom");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning green clockwise \n");
-			cubeLog.println(cubeToString());
 
 		} else {
 			turnFaceCounterClock(green);
@@ -197,9 +188,8 @@ public class Cube {
 			replaceColor(yellowc, red, "bottom");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning green counter clockwise \n");
-			cubeLog.println(cubeToString());
 		}
-		
+		cubeLog.println(cubeToString());
 		moves.add(colorNum + (clockWise ? 0 : 6));
 
 	}
@@ -221,7 +211,6 @@ public class Cube {
 			replaceColorR(greenc, white, "right");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning red clockwise \n");
-			cubeLog.println(cubeToString());
 
 		} else {
 			turnFaceCounterClock(red);
@@ -231,9 +220,8 @@ public class Cube {
 			replaceColorR(whitec, green, "left");
 
 			turnLog.println("Turn " + ++turnCount+ "\nturning red counter clockwise \n");
-			cubeLog.println(cubeToString());
 		}
-		
+		cubeLog.println(cubeToString());
 		moves.add(colorNum + (clockWise ? 0 : 6));
 
 	}
