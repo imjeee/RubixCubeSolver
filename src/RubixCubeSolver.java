@@ -70,16 +70,16 @@ public class RubixCubeSolver {
 			Solver sol = new Solver(cube);
 			sol.solve();
 			cube.printCube();
-			if (!(cube.topSolved() && cube.yoSideSolved()))
+			if (!(cube.topSolved() && cube.middleSolved()))
 				break;
 			totalTurns += cube.getTurnCount();
 		}
-		if (!(cube.topSolved() && cube.yoSideSolved())){
+		if (!(cube.topSolved() && cube.middleSolved())){
 			System.out.println("Failed to solve!");
 		} else {
 			System.out.println("Finished! No problems.");
 			System.out.println("Scrambles solved: " + scrambles);
-			System.out.println("Average amt. of turns to solve the top and y/o side: " + totalTurns/scrambles);
+			System.out.println("Average amt. of turns to solve the top and middle layer: " + totalTurns/scrambles);
 		}
 	}
 
