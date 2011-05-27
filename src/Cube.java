@@ -877,4 +877,56 @@ public class Cube {
 	}
 	
 	
+	
+	public int greenCrossState(){
+		int state = 0;
+		
+		state |= bottomMid(yellow) == 'y' ? 1 : 0;
+		state <<= 1;
+		state |= bottomMid(orange) == 'o' ? 1 : 0;
+		state <<= 1;
+		state |= bottomMid(white) == 'w' ? 1 : 0;
+		state <<= 1;
+		state |= bottomMid(red) == 'r' ? 1 : 0;
+		state <<= 1;
+		state |= rightMid(green) == 'g' ? 1 : 0;
+		state <<= 1;
+		state |= bottomMid(green) == 'g' ? 1 : 0;
+		state <<= 1;
+		state |= leftMid(green) == 'g' ? 1 : 0;
+		state <<= 1;
+		state |= topMid(green) == 'g' ? 1 : 0;
+		
+		int case8 = 0xff; // 1111 1111
+		int case7 = 0x0f; // 	  1111
+		int case6 = 0x0a; // 	  1010
+		int case5 = 0x05; //	  0101
+		int case4 = 0x03; //      0011
+		int case3 = 0x06; //	  0110
+		int case2 = 0x0c; //	  1100
+		int case1 = 0x09; //	  1001
+		
+		if ((state & case8) == case8)
+			return 8;
+		else if ((state & case7) == case7)
+			return 7;
+		else if ((state & case6) == case6)
+			return 6;
+		else if ((state & case5) == case5)
+			return 5;
+		else if ((state & case4) == case4)
+			return 4;
+		else if ((state & case3) == case3)
+			return 3;
+		else if ((state & case2) == case2)
+			return 2;
+		else if ((state & case1) == case1)
+			return 1;
+		else
+			return 0;
+		
+		
+	}
+	
+	
 }
