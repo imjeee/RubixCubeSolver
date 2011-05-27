@@ -58,9 +58,10 @@ public class RubixCubeSolver {
 		System.out.println("Scrambling...");
 		cube.scramble();
 		cube.printCube();
-		
+		System.out.println("finish scramble");
 		Solver sol = new Solver(cube);
 		sol.solve();
+		cube.printCube();
 
 
 	}
