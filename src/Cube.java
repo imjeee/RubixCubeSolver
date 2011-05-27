@@ -11,7 +11,7 @@ public class Cube {
 	
 	private LinkedList<Integer> moves = new LinkedList<Integer>();
 	
-	public static final int y = 0, w = 1, b = 2, g = 3, r = 4, o = 5;
+	public static final int y = 1, w = 2, b = 4, g = 8, r = 16, o = 32;
 	
 	private char[][] yellow = new char[3][3]; // yellow is front
 	private char[][] white = new char[3][3]; // white is back
@@ -745,5 +745,80 @@ public class Cube {
 		}
 	}
 	
+	public boolean topCrossSolved(){
+		return topMid(red) == 'r' && topMid(white) == 'w' && topMid(yellow) == 'y' && topMid(orange) == 'o' 
+			&& topMid(blue) == 'b' && leftMid(blue) == 'b' && rightMid(blue) == 'b' && bottomMid(blue) == 'b';
+	}
+	
+	public int getTurnCount(){
+		return turnCount;
+	}
+	
+	
+	public int translateColor(char c){
+		switch(c){
+			case 'y':
+				return y;
+			case 'w':
+				return w;
+			case 'b':
+				return b;
+			case 'g':
+				return g;
+			case 'r':
+				return r;
+			case 'o':
+				return o;
+			default:
+				return -1;
+		}
+	}
+	
+	public char bottomLeft(char[][] face){
+		return face[2][0];
+	}
+	
+	public char bottomRight(char[][] face){
+		return face[2][2];
+	}
+	
+	public char topRight(char[][] face){
+		return face[0][2];
+	}
+	
+	public char topLeft(char[][] face){
+		return face[0][0];
+	}
+	
+
+	public int findCorner(char c1, char c2, char c3){
+		int corner = translateColor(c1) & translateColor(c2) & translateColor(c3);
+		
+		if ((translateColor(bottomRight(blue)) & translateColor(topRight(yellow)) & translateColor(topLeft(orange))) == corner)
+			return 0;
+		else if ((translateColor(topRight(blue)) & translateColor(topRight(orange)) & translateColor(topLeft(white))) == corner)
+			return 1;
+		else if ((translateColor(topLeft(blue)) & translateColor(topRight(white)) & translateColor(topLeft(red))) == corner)
+			return 2;
+		else if ((translateColor(bottomLeft(blue)) & translateColor(topRight(red)) & translateColor(topLeft(yellow))) == corner)
+			return 3;
+
+		else if ((translateColor(topLeft(green)) & translateColor(bottomLeft(yellow)) & translateColor(bottomRight(red))) == corner)
+			return 4;
+		else if ((translateColor(bottomLeft(green)) & translateColor(bottomLeft(red)) & translateColor(bottomRight(white))) == corner)
+			return 5;
+		else if ((translateColor(bottomRight(green)) & translateColor(bottomLeft(white)) & translateColor(bottomRight(orange))) == corner)
+			return 6;
+		else if ((translateColor(topRight(green)) & translateColor(bottomLeft(orange)) & translateColor(bottomRight(yellow))) == corner)
+			return 7;
+		else
+			return -1;
+	}
+	
+	
+	
+	public boolean jiesresponsibility(){
+		return false;
+	}
 	
 }

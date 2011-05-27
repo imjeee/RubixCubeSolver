@@ -101,6 +101,17 @@ public class Solver {
 	}
 	
 	private void solveTopCorners(){
+		int[][] topMidBlue = {
+				{}, // byo
+				{wm,gm,wp,ym,op,yp,om}, // bow
+				{wp,gm,wm,gp,gp,op,ym,om,yp}, // bwr
+				{ym,gm,yp,gp,gp,op,ym,om,yp}, // bry
+				
+				{gp,op,ym,om,yp}, // gyr
+				{gp,gp,op,ym,om,yp}, // grw
+				{gm,op,ym,om,yp}, // gwo
+				{op,ym,om,yp}, // goy
+		};
 		
 	}
 	

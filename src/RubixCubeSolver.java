@@ -24,10 +24,10 @@ public class RubixCubeSolver {
 
 		Cube cube = new Cube();
 		cube.addOutputStream(System.out);
-		cube.enableTurnLog();
-		cube.enableCubeLog();
-		cube.enableCubeRandomizeLog();
-		cube.enableRandomizeLog();
+		//cube.enableTurnLog();
+		//cube.enableCubeLog();
+		//cube.enableCubeRandomizeLog();
+		//cube.enableRandomizeLog();
 		
 		if (args.length != 1) {
 			System.out.println("usage: RubixCubeSolver <configuration file>");
@@ -54,14 +54,26 @@ public class RubixCubeSolver {
 
 		cube.checkIntegrity();
 
-
-		System.out.println("Scrambling...");
-		cube.scramble();
-		cube.printCube();
-		System.out.println("finish scramble");
-		Solver sol = new Solver(cube);
-		sol.solve();
-		cube.printCube();
+		long totalTurns = 0;
+		
+		for(int i = 0; i < 10000; i++){
+			System.out.println("Scrambling...");
+			cube.scramble();
+			cube.printCube();
+			System.out.println("Solving...");
+			Solver sol = new Solver(cube);
+			sol.solve();
+			cube.printCube();
+			if (!cube.topCrossSolved())
+				break;
+			totalTurns += cube.getTurnCount();
+		}
+		if (!cube.topCrossSolved()){
+			System.out.println("Failed to solve!");
+		} else {
+			System.out.println("Finished! No problems.");
+			System.out.println("Average amt. of turns to solve the top cross: " + totalTurns/10000d);
+		}
 
 
 	}
@@ -94,7 +106,7 @@ public class RubixCubeSolver {
 
 
 
-
+	
 	
 
 }
