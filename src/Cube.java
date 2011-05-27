@@ -829,7 +829,7 @@ public class Cube {
 	
 	
 	public boolean blueCornerOriented(char c1, char c2){
-		return ((translateColor(topRight(yellow)) & translateColor(topLeft(orange))) == (translateColor(c1) & translateColor(c2))) && bottomRight(blue) == 'b';
+		return ((translateColor(topRight(yellow)) | translateColor(topLeft(orange))) == (translateColor(c1) | translateColor(c2))) && (bottomRight(blue) == 'b');
 	}
 	
 	

@@ -93,7 +93,7 @@ public class Solver {
 		cube.turnBlue(true);
 		cube.performMoves(topMidBlue[cube.findSide(b, r)]);
 		cube.turnBlue(true);
-		
+		System.out.println("Done with the cross");
 		
 		
 	}
@@ -101,13 +101,13 @@ public class Solver {
 	private void solveTopCorners() throws Exception{
 		int[][] topMidBlue = {
 				{}, // byo
-				{wm,gm,wp,ym,op,yp,om}, // bow
+				{wm,gm,wp,ym,op,yp,om}, // bow good
 				{wp,gm,wm,gp,gp,op,ym,om,yp}, // bwr
 				{ym,gm,yp,gp,gp,op,ym,om,yp}, // bry
 				
 				{gp,op,ym,om,yp}, // gyr
-				{gp,gp,op,ym,om,yp}, // grw
-				{gm,op,ym,om,yp}, // gwo
+				{gp,gp,op,ym,om,yp}, // grw good
+				{gm,op,ym,om,yp}, // gwo good
 				{op,ym,om,yp}, // goy
 		};
 		
@@ -119,6 +119,7 @@ public class Solver {
 			bruteForceOrientation(c1[i],c2[i]);
 			cube.turnBlue(true);
 		}
+		//bruteForce2();
 		
 	}
 	
@@ -131,6 +132,7 @@ public class Solver {
 			cube.performMoves(moves);
 		}
 	}
+	
 
 	private void solveMiddleLayer(){
 		
