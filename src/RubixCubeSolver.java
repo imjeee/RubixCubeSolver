@@ -55,8 +55,8 @@ public class RubixCubeSolver {
 		cube.checkIntegrity();
 
 		long totalTurns = 0;
-		
-		for(int i = 0; i < 10000; i++){
+		int scrambles = 10;
+		for(int i = 0; i < scrambles; i++){
 			System.out.println("Scrambling...");
 			cube.scramble();
 			cube.printCube();
@@ -72,7 +72,7 @@ public class RubixCubeSolver {
 			System.out.println("Failed to solve!");
 		} else {
 			System.out.println("Finished! No problems.");
-			System.out.println("Average amt. of turns to solve the top cross: " + totalTurns/10000d);
+			System.out.println("Average amt. of turns to solve the top cross: " + totalTurns/scrambles);
 		}
 
 

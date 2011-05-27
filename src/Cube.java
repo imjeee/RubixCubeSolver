@@ -792,24 +792,24 @@ public class Cube {
 	
 
 	public int findCorner(char c1, char c2, char c3){
-		int corner = translateColor(c1) & translateColor(c2) & translateColor(c3);
+		int corner = translateColor(c1) | translateColor(c2) | translateColor(c3);
 		
-		if ((translateColor(bottomRight(blue)) & translateColor(topRight(yellow)) & translateColor(topLeft(orange))) == corner)
+		if ((translateColor(bottomRight(blue)) | translateColor(topRight(yellow)) | translateColor(topLeft(orange))) == corner)
 			return 0;
-		else if ((translateColor(topRight(blue)) & translateColor(topRight(orange)) & translateColor(topLeft(white))) == corner)
+		else if ((translateColor(topRight(blue)) | translateColor(topRight(orange)) | translateColor(topLeft(white))) == corner)
 			return 1;
-		else if ((translateColor(topLeft(blue)) & translateColor(topRight(white)) & translateColor(topLeft(red))) == corner)
+		else if ((translateColor(topLeft(blue)) | translateColor(topRight(white)) | translateColor(topLeft(red))) == corner)
 			return 2;
-		else if ((translateColor(bottomLeft(blue)) & translateColor(topRight(red)) & translateColor(topLeft(yellow))) == corner)
+		else if ((translateColor(bottomLeft(blue)) | translateColor(topRight(red)) | translateColor(topLeft(yellow))) == corner)
 			return 3;
 
-		else if ((translateColor(topLeft(green)) & translateColor(bottomLeft(yellow)) & translateColor(bottomRight(red))) == corner)
+		else if ((translateColor(topLeft(green)) | translateColor(bottomLeft(yellow)) | translateColor(bottomRight(red))) == corner)
 			return 4;
-		else if ((translateColor(bottomLeft(green)) & translateColor(bottomLeft(red)) & translateColor(bottomRight(white))) == corner)
+		else if ((translateColor(bottomLeft(green)) | translateColor(bottomLeft(red)) | translateColor(bottomRight(white))) == corner)
 			return 5;
-		else if ((translateColor(bottomRight(green)) & translateColor(bottomLeft(white)) & translateColor(bottomRight(orange))) == corner)
+		else if ((translateColor(bottomRight(green)) | translateColor(bottomLeft(white)) | translateColor(bottomRight(orange))) == corner)
 			return 6;
-		else if ((translateColor(topRight(green)) & translateColor(bottomLeft(orange)) & translateColor(bottomRight(yellow))) == corner)
+		else if ((translateColor(topRight(green)) | translateColor(bottomLeft(orange)) | translateColor(bottomRight(yellow))) == corner)
 			return 7;
 		else
 			return -1;
@@ -817,8 +817,12 @@ public class Cube {
 	
 	
 	
-	public boolean jiesresponsibility(){
-		return false;
+	public boolean blueCornerOriented(char c1, char c2){
+		return ((translateColor(topRight(yellow)) & translateColor(topLeft(orange))) == (translateColor(c1) & translateColor(c2))) && bottomLeft(blue) == 'b';
+	}
+	
+	public boolean rightCornerIsBlue(){
+		return blue[2][2] == 'b';
 	}
 	
 }

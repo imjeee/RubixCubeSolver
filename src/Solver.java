@@ -96,11 +96,9 @@ public class Solver {
 		
 		
 		
-		// do the above 3 more times for the other sides
-		
 	}
 	
-	private void solveTopCorners(){
+	private void solveTopCorners() throws Exception{
 		int[][] topMidBlue = {
 				{}, // byo
 				{wm,gm,wp,ym,op,yp,om}, // bow
@@ -113,11 +111,27 @@ public class Solver {
 				{op,ym,om,yp}, // goy
 		};
 		
+		char[] c1 = {'y','o','w','r'};
+		char[] c2 = {'o','w','r','y'};
+
+		for(int i = 0; i < 4; i++){
+			cube.performMoves(topMidBlue[cube.findCorner(b,c1[i],c2[i])]);
+			bruteForceOrientation(c1[i],c2[i]);
+			cube.turnBlue(true);
+		}
+		
 	}
 	
 	
 	
 	
+	private void bruteForceOrientation(char c1,char c2) {
+		int[] moves = {om,gm,op,gp};
+		while(!cube.rightCornerIsBlue()){
+			cube.performMoves(moves);
+		}
+	}
+
 	private void solveMiddleLayer(){
 		
 	}
