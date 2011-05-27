@@ -226,6 +226,36 @@ public class Cube {
 
 	}
 	
+	void turnMiddle(boolean clockWise) throws Exception {
+
+		int colorNum = 4;
+		
+		char[] whitec = deepCopy(white, "midrow");
+		char[] orangec = deepCopy(orange, "midrow");
+		char[] yellowc = deepCopy(yellow, "midrow");
+		char[] redc = deepCopy(red, "midrow");
+
+		if (clockWise) {
+			replaceColor(redc, white, "midrow");
+			replaceColor(whitec, orange, "midrow");
+			replaceColor(orangec, yellow, "midrow");
+			replaceColor(yellowc, red, "midrow");
+
+			turnLog.println("Turn " + ++turnCount + "\nturning middle clockwise");
+
+		} else {
+			replaceColor(orangec, white, "midrow");
+			replaceColor(yellowc, orange, "midrow");
+			replaceColor(redc, yellow, "midrow");
+			replaceColor(whitec, red, "midrow");
+
+			turnLog.println("Turn " + ++turnCount+ "\nturning middle counter clockwise \n");
+		}
+		cubeLog.println(cubeToString());
+		moves.add(colorNum + (clockWise ? 0 : 6));
+
+	}
+	
 	
 	private void turnFaceClock(char[][] face) {
 
@@ -270,6 +300,8 @@ public class Cube {
 				target[i][0] = source[i];
 			} else if (side.equals("right")) {
 				target[i][2] = source[i];
+			} else if (side.equals("midrow")) {
+				target[1][i] = source[i];
 			} else {
 				throw new Exception("error determining side (replaceColor)");
 			}
@@ -286,6 +318,8 @@ public class Cube {
 				target[2 - i][0] = source[i];
 			} else if (side.equals("right")) {
 				target[2 - i][2] = source[i];
+			} else if (side.equals("midrow")) {
+				target[1][2-i] = source[i];
 			} else {
 				throw new Exception("error determining side (replaceColor)");
 			}
@@ -306,6 +340,8 @@ public class Cube {
 				result[i] = face[i][0];
 			} else if (side.equals("right")) {
 				result[i] = face[i][2];
+			} else if (side.equals("midrow")) {
+				result[i] = face[1][i];
 			} else {
 				throw new Exception("error determining side (deepcopy)");
 			}
@@ -818,6 +854,26 @@ public class Cube {
 	
 	public boolean blueCornerOriented(char c1, char c2){
 		return ((translateColor(topRight(yellow)) | translateColor(topLeft(orange))) == (translateColor(c1) | translateColor(c2))) && (bottomRight(blue) == 'b');
+	}
+	
+	public boolean middleSolved(){
+		return yoSideSolved() & owSideSolved() & wrSideSolved() & rySideSolved();
+	}
+	
+	public boolean yoSideSolved(){
+		return rightMid(yellow) == 'y' && leftMid(orange) == 'o';
+	}
+	
+	public boolean owSideSolved(){
+		return rightMid(orange) == 'o' && leftMid(white) == 'w';
+	}
+	
+	public boolean wrSideSolved(){
+		return rightMid(white) == 'w' && leftMid(red) == 'r';
+	}
+	
+	public boolean rySideSolved(){
+		return rightMid(red) == 'r' && leftMid(yellow) == 'y';
 	}
 	
 	

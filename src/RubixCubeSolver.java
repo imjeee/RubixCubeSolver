@@ -54,8 +54,14 @@ public class RubixCubeSolver {
 
 		cube.checkIntegrity();
 
+		testSolver(cube, 1000);
+		
+
+	}
+
+
+	private static void testSolver(Cube cube, int scrambles) throws Exception{
 		long totalTurns = 0;
-		int scrambles = 1000;
 		for(int i = 0; i < scrambles; i++){
 			//System.out.println("Scrambling...");
 			cube.scramble();
@@ -64,24 +70,18 @@ public class RubixCubeSolver {
 			Solver sol = new Solver(cube);
 			sol.solve();
 			//cube.printCube();
-			if (!cube.topSolved())
+			if (!(cube.topSolved() && cube.yoSideSolved()))
 				break;
 			totalTurns += cube.getTurnCount();
 		}
-		if (!cube.topSolved()){
+		if (!(cube.topSolved() && cube.yoSideSolved())){
 			System.out.println("Failed to solve!");
 		} else {
 			System.out.println("Finished! No problems.");
 			System.out.println("Scrambles solved: " + scrambles);
-			System.out.println("Average amt. of turns to solve the top: " + totalTurns/scrambles);
+			System.out.println("Average amt. of turns to solve the top and y/o side: " + totalTurns/scrambles);
 		}
-		
-
-
 	}
-
-
-
 
 
 
