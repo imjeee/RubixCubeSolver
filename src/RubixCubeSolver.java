@@ -63,13 +63,13 @@ public class RubixCubeSolver {
 	private static void testSolver(Cube cube, int scrambles) throws Exception{
 		long totalTurns = 0;
 		for(int i = 0; i < scrambles; i++){
-			//System.out.println("Scrambling...");
+			System.out.println("Scrambling...");
 			cube.scramble();
-			//cube.printCube();
-			//System.out.println("Solving...");
+			cube.printCube();
+			System.out.println("Solving...");
 			Solver sol = new Solver(cube);
 			sol.solve();
-			//cube.printCube();
+			cube.printCube();
 			if (!(cube.topSolved() && cube.yoSideSolved()))
 				break;
 			totalTurns += cube.getTurnCount();

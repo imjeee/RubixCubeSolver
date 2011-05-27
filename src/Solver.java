@@ -133,6 +133,43 @@ public class Solver {
 	
 
 	private void solveMiddleLayer(){
+		solveYellowOrange();
+	}
+	
+	private void solveYellowOrange() {
+		
+		int[][] yellowOrange = {
+				{}, // bw
+				{}, // br
+				{}, // by
+				{}, // bo
+				
+				{}, // yb
+				{ym,gp,yp,rm,yp,rp,ym,gp,gp,		om,gp,op,ym,op,yp,om}, // yr//ow
+				{gm,								om,gp,op,ym,op,yp,om}, // yg/gw
+				{}, // yo
+				
+				{}, // ob
+				{om,gp,op,ym,op,yp,om,gp,			om,gp,op,ym,op,yp,om}, // oy/wg
+				{gp,gp,								om,gp,op,ym,op,yp,om}, // og///
+				{wm,gp,wp,om,wp,op,wm,gm,			yp,gm,ym,op,ym,om,yp}, // ow/gy
+				
+				{}, // wb
+				{wm,gp,wp,om,wp,op,wm,				om,gp,op,ym,op,yp,om}, // wo/yr
+				{gp,								om,gp,op,ym,op,yp,om}, // wg///
+				{rm,gp,rp,wm,rp,wp,rm,gp,gp,		yp,gm,ym,op,ym,om,yp}, // wr/gr
+				
+				{}, // rb
+				{rm,gp,rp,wm,rp,wp,rm,gm,			om,gp,op,ym,op,yp,om}, // rw/
+				{									om,gp,op,ym,op,yp,om}, // rg/
+				{ym,gp,yp,rm,yp,rp,ym,gp,			yp,gm,ym,op,ym,om,yp}, // ry/rw
+				
+				{gp,gp,								yp,gm,ym,op,ym,om,yp}, // gy
+				{gm,								yp,gm,ym,op,ym,om,yp}, // gr
+				{									yp,gm,ym,op,ym,om,yp}, // gw
+				{gp,								yp,gm,ym,op,ym,om,yp}  // go
+		};
+		cube.performMoves(yellowOrange[cube.findSide(y, o)]);
 		
 	}
 	
