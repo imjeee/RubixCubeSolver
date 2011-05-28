@@ -177,8 +177,57 @@ public class Solver {
 	
 	
 	private void solveBottomLayer() throws Exception{
+		//System.out.println("solve bottom layer");
 		solveTopGreenCross();
+		//System.out.println("solve solveCrossIncludingSide");
 		solveCrossIncludingSide();
+		//System.out.println("solve solveCornerGetToPlace");
+		solveCornerGetToPlace();
+		//System.out.println("solve solveToCompleteCube");
+		solveToCompleteCube();
+	}
+	
+	private void solveToCompleteCube() throws Exception {
+		int[] turns = {om,bm,op,bp};
+		
+		System.out.println("try to complete");
+		cube.printCube();
+		System.out.println();
+		
+		for(int i = 0; i < 4; i++){
+			while(!cube.cornergreen()){
+				cube.performMoves(turns);
+			}
+			cube.turnGreen(true);
+		}
+		
+	}
+
+	private void solveCornerGetToPlace() throws Exception {
+		
+		int[][] turns = {
+				{			gp,wp,gm,ym,gp,wm,gm,yp,		 },
+				{gp,gp,		gp,wp,gm,ym,gp,wm,gm,yp,	gm,gm},//yo
+				{gp,		gp,wp,gm,ym,gp,wm,gm,yp,	gm},//ow
+				{			gp,wp,gm,ym,gp,wm,gm,yp,	},//wr
+				{gm,		gp,wp,gm,ym,gp,wm,gm,yp,	gp},//ry
+				{}
+		};
+		
+		//System.out.println("green corner could be 0");
+		
+		if(cube.greenCornerPosition() == 0){
+			cube.performMoves(turns[cube.greenCornerPosition()]);
+			while(cube.greenCornerPosition() == 0)
+				cube.turnGreen(true);
+		}
+		cube.printCube();
+		//System.out.println("definite has a corner match");
+		
+		while(cube.greenCornerPosition() != 5){
+			cube.performMoves(turns[cube.greenCornerPosition()]);
+		}
+		
 	}
 	
 	private void solveCrossIncludingSide() throws Exception {
@@ -190,25 +239,6 @@ public class Solver {
 				{   wp,gp,wm,gp,wp,gp,gp,wm,	gp,gp},
 				{gm,wp,gp,wm,gp,wp,gp,gp,wm, 		gm},
 				{gm,wp,gp,wm,gp,wp,gp,gp,wm,		gm}
-				/*
-				 * int c1= bottomMid(white);
-			int c2 = bottomMid(orange);
-			int c3 = bottomMid(yellow);
-			int c4 = bottomMid(red);
-				 * if(c1 == 'w' & c2 == 'o'){
-				state = 0;
-			} else if(c1 == 'o' & c2 == 'y'){
-				state = 1;
-			} else if(c1 == 'y' & c2 == 'r'){
-				state = 2;
-			} else if(c1 == 'r' & c2 == 'w'){
-				state = 3;
-			} else if(c1 == 'w' & c3 == 'y'){
-				state = 4;
-			} else if(c1 == 'o' & c3 == 'r'){
-				state = 5;
-			}
-				 */
 		};
 		
 		int result = -1;

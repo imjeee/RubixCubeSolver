@@ -977,6 +977,11 @@ public class Cube {
 			return 0;
 		
 	}
+
+
+	public boolean cornergreen() {
+		return bottomRight(green) == 'g';
+	}
 	
 	
 }
