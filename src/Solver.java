@@ -211,8 +211,13 @@ public class Solver {
 				 */
 		};
 		
-		while(cube.find2CorrectGreen() != 6){
-			trace("correct green state is " + cube.find2CorrectGreen());
+		int result = -1;
+		while((result = cube.find2CorrectGreen()) != 6){
+			if (result == -1){
+				cube.turnGreen(true);
+				continue;
+			}
+			//trace("correct green state is " + cube.find2CorrectGreen());
 			cube.performMoves(turns[cube.find2CorrectGreen()]);
 		}		
 	}
@@ -258,7 +263,7 @@ public class Solver {
 	private void trace(String s) {
 		System.out.println(s);
 	}
-	private void trace(int s){
+	private void trace(int s){	
 		System.out.println(s);
 	}
 }

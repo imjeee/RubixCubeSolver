@@ -878,41 +878,33 @@ public class Cube {
 	
 	public int find2CorrectGreen() throws Exception{
 		int state = -1;
-		boolean m = false;
-		while(!m){
 			
-			System.out.println("print cube");
-			printCube();
 			
-			int c1= bottomMid(white);
-			int c2 = bottomMid(orange);
-			int c3 = bottomMid(yellow);
-			int c4 = bottomMid(red);
-			
-			if(c1 == 'w' & c2 == 'o'){
-				state = 0;
-			} else if(c1 == 'o' & c2 == 'y'){
-				state = 1;
-			} else if(c1 == 'y' & c2 == 'r'){
-				state = 2;
-			} else if(c1 == 'r' & c2 == 'w'){
-				state = 3;
-			} else if(c1 == 'w' & c3 == 'y'){
-				state = 4;
-			} else if(c1 == 'o' & c3 == 'r'){
-				state = 5;
-			}
-			
-			if(c1 == 'w' & c2 == 'o' & c3 == 'y' & c4 == 'r'){
-				state = 6;
-			}
-			
-			if(state != -1){
-				m = true;
-			} else {
-				turnGreen(true);
-			}
+		int c1= bottomMid(white);
+		int c2 = bottomMid(orange);
+		int c3 = bottomMid(yellow);
+		int c4 = bottomMid(red);
+		
+		if(c1 == 'w' & c2 == 'o'){
+			state = 0;
+		} else if(c1 == 'o' & c2 == 'y'){
+			state = 1;
+		} else if(c1 == 'y' & c2 == 'r'){
+			state = 2;
+		} else if(c1 == 'r' & c2 == 'w'){
+			state = 3;
+		} else if(c1 == 'w' & c3 == 'y'){
+			state = 4;
+		} else if(c1 == 'o' & c3 == 'r'){
+			state = 5;
 		}
+		
+		if(c1 == 'w' & c2 == 'o' & c3 == 'y' & c4 == 'r'){
+			state = 6;
+		}
+		
+
+		
 		return state;
 	}
 	
@@ -966,10 +958,10 @@ public class Cube {
 	
 	public int greenCornerPosition(){
 		
-		boolean yo = (translateColor(bottomRight(yellow)) & translateColor(bottomLeft(orange)) & translateColor(topRight(green))) == (y & o & g);
-		boolean ow = (translateColor(bottomRight(orange)) & translateColor(bottomLeft(white)) & translateColor(bottomRight(green))) == (o & w & g);
-		boolean wr = (translateColor(bottomRight(white)) & translateColor(bottomLeft(red)) & translateColor(bottomLeft(green))) == (w & r & g);
-		boolean ry = (translateColor(bottomRight(red)) & translateColor(bottomLeft(yellow)) & translateColor(topLeft(green))) == (r & y & g);
+		boolean yo = (translateColor(bottomRight(yellow)) | translateColor(bottomLeft(orange)) | translateColor(topRight(green))) == (y | o | g);
+		boolean ow = (translateColor(bottomRight(orange)) | translateColor(bottomLeft(white)) | translateColor(bottomRight(green))) == (o | w | g);
+		boolean wr = (translateColor(bottomRight(white)) | translateColor(bottomLeft(red)) | translateColor(bottomLeft(green))) == (w | r | g);
+		boolean ry = (translateColor(bottomRight(red)) | translateColor(bottomLeft(yellow)) | translateColor(topLeft(green))) == (r | y | g);
 		
 		if (yo && ow && wr && ry)
 			return 5;
