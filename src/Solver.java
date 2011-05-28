@@ -3,8 +3,8 @@ public class Solver {
 	
 	// F = front B = back L = left R = right U = up D = down
 	// p = plus m = minus
-	private static final int yp = 0, wp = 1, rp = 2, op = 3, bp = 4, gp = 5, 
-							 ym = 6, wm = 7, rm = 8, om = 9, bm = 10, gm = 11;
+	private static final int yp = 0, wp = 1, rp = 2, op = 3, bp = 4, gp = 5, mp = 6,
+							 ym = 7, wm = 8, rm = 9, om = 10, bm = 11, gm = 12, mm = 13 ;
 	
 	private static final char b = 'b', w = 'w', y = 'y', r = 'r', o = 'o', g = 'g';
 	

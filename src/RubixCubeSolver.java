@@ -54,7 +54,24 @@ public class RubixCubeSolver {
 
 		cube.checkIntegrity();
 		
-		testSolver(cube, 1000);
+		//testSolver(cube, 1000);
+		
+		System.out.println("Scrambling...");
+		cube.scramble();
+		cube.printCube();
+		System.out.println();
+		System.out.println("Moves to scramble: ");
+		cube.printMoves(25, 5);
+		
+		System.out.println();
+		System.out.println("Solving...");
+		cube.resetMoves();
+		Solver sol = new Solver(cube);
+		sol.solve();
+		cube.printCube();
+		System.out.println();
+		System.out.println("Moves to solve: ");
+		cube.printMoves(25, 5);
 		
 
 	}

@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class Cube {
 	
-	private static String[] turns = {"F+", "B+", "L+", "R+", "U+", "D+", "F-", "B-", "L-", "R-", "U-", "D-"};
+	private static String[] turns = {"F+", "B+", "L+", "R+", "U+", "D+", "M+", "F-", "B-", "L-", "R-", "U-", "D-", "M-"};
 	
 	private LinkedList<Integer> moves = new LinkedList<Integer>();
 	
@@ -62,7 +62,7 @@ public class Cube {
 
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 
 	}
 
@@ -94,7 +94,7 @@ public class Cube {
 			turnLog.println("Turn " + ++turnCount+ "\nturning blue counter clockwise \n");
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 
 	}
 
@@ -127,7 +127,7 @@ public class Cube {
 			turnLog.println("Turn " + ++turnCount+ "\nturning orange counter clockwise \n");
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 	}
 	
 	void turnWhite(boolean clockWise) throws Exception {
@@ -158,7 +158,7 @@ public class Cube {
 			turnLog.println("Turn " + ++turnCount+ "\nturning white counter clockwise \n");
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 
 	}
 
@@ -190,7 +190,7 @@ public class Cube {
 			turnLog.println("Turn " + ++turnCount+ "\nturning green counter clockwise \n");
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 
 	}
 
@@ -222,13 +222,13 @@ public class Cube {
 			turnLog.println("Turn " + ++turnCount+ "\nturning red counter clockwise \n");
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 
 	}
 	
 	void turnMiddle(boolean clockWise) throws Exception {
 
-		int colorNum = 4;
+		int colorNum = 6;
 		
 		char[] whitec = deepCopy(white, "midrow");
 		char[] orangec = deepCopy(orange, "midrow");
@@ -252,7 +252,7 @@ public class Cube {
 			turnLog.println("Turn " + ++turnCount+ "\nturning middle counter clockwise \n");
 		}
 		cubeLog.println(cubeToString());
-		moves.add(colorNum + (clockWise ? 0 : 6));
+		moves.add(colorNum + (clockWise ? 0 : 7));
 
 	}
 	
@@ -601,6 +601,29 @@ public class Cube {
 		errLog.disable();
 	}
 	
+	public void printMoves(int nl, int space){
+		Iterator<Integer> it = moves.iterator();
+		pmh2(it, nl, space, 0, 0);
+		outputLog.println();
+	}
+	
+	private void pmh2(Iterator<Integer> it, int nl, int space, int newlinec, int spacec){
+		if (it.hasNext()){
+			outputLog.print(turns[it.next()] + " ");
+			newlinec++;
+			spacec++;
+			if (spacec == space){
+				outputLog.print("\t");
+				spacec = 0;
+			}
+			if (newlinec == nl){
+				outputLog.println();
+				newlinec = 0;
+			}
+			pmh2(it, nl, space, newlinec, spacec);
+		}
+	}
+	
 	public void printMoves(){
 		Iterator<Integer> it = moves.iterator();
 		pmh(it);
@@ -740,22 +763,28 @@ public class Cube {
 						turnGreen(true);
 						break;
 					case 6:
-						turnYellow(false);
+						turnMiddle(true);
 						break;
 					case 7:
-						turnWhite(false);
+						turnYellow(false);
 						break;
 					case 8:
-						turnRed(false);
+						turnWhite(false);
 						break;
 					case 9:
-						turnOrange(false);
+						turnRed(false);
 						break;
 					case 10:
-						turnBlue(false);
+						turnOrange(false);
 						break;
 					case 11:
+						turnBlue(false);
+						break;
+					case 12:
 						turnGreen(false);
+						break;
+					case 13:
+						turnMiddle(false);
 						break;
 					default:
 						errLog.println("Invalid move number: " + i);
