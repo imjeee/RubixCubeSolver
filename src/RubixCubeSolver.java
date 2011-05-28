@@ -54,10 +54,7 @@ public class RubixCubeSolver {
 
 		cube.checkIntegrity();
 		
-		//do {
-			testSolver(cube, 1);
-		//} while (cube.greenCrossState() != 8);
-		System.out.println("Corner position: " + cube.greenCornerPosition());
+		testSolver(cube, 1000);
 		
 
 	}
@@ -66,23 +63,23 @@ public class RubixCubeSolver {
 	private static void testSolver(Cube cube, int scrambles) throws Exception{
 		long totalTurns = 0;
 		for(int i = 0; i < scrambles; i++){
-			System.out.println("Scrambling...");
+			//System.out.println("Scrambling...");
 			cube.scramble();
-			cube.printCube();
-			System.out.println("Solving...");
+			//cube.printCube();
+			//System.out.println("Solving...");
 			Solver sol = new Solver(cube);
 			sol.solve();
-			cube.printCube();
-			if (!(cube.topSolved() && cube.middleSolved()&& (cube.greenCrossState() == 8)))
+			//cube.printCube();
+			if (!cube.solved())
 				break;
 			totalTurns += cube.getTurnCount();
 		}
-		if (!(cube.topSolved() && cube.middleSolved() && (cube.greenCrossState() == 8))){
+		if (!cube.solved()){
 			System.out.println("Failed to solve!");
 		} else {
 			System.out.println("Finished! No problems.");
 			System.out.println("Scrambles solved: " + scrambles);
-			System.out.println("Average amt. of turns to solve the top and middle layer and green cross: " + totalTurns/scrambles);
+			System.out.println("Average amt. of turns to solve the entire cube: " + totalTurns/scrambles);
 		}
 	}
 

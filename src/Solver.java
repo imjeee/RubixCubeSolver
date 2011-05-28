@@ -190,9 +190,9 @@ public class Solver {
 	private void solveToCompleteCube() throws Exception {
 		int[] turns = {om,bm,op,bp};
 		
-		System.out.println("try to complete");
-		cube.printCube();
-		System.out.println();
+		//System.out.println("try to complete");
+		//cube.printCube();
+		//System.out.println();
 		
 		for(int i = 0; i < 4; i++){
 			while(!cube.cornergreen()){
@@ -221,7 +221,7 @@ public class Solver {
 			while(cube.greenCornerPosition() == 0)
 				cube.turnGreen(true);
 		}
-		cube.printCube();
+		//cube.printCube();
 		//System.out.println("definite has a corner match");
 		
 		while(cube.greenCornerPosition() != 5){

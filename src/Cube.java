@@ -984,4 +984,8 @@ public class Cube {
 	}
 	
 	
+	public boolean solved(){
+		return topSolved() && middleSolved() && (greenCornerPosition() == 5) && (topLeft(blue) == 'b') && (topRight(blue) == 'b') && (bottomLeft(blue) == 'b') && (bottomRight(blue) == 'b');
+	}
+	
 }
