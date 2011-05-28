@@ -55,7 +55,7 @@ public class RubixCubeSolver {
 		cube.checkIntegrity();
 		
 		//do {
-			testSolver(cube, 1);
+			testSolver(cube, 1000);
 		//} while (cube.greenCrossState() != 8);
 		//System.out.println("Cross state: " + cube.greenCrossState());
 		
@@ -73,16 +73,16 @@ public class RubixCubeSolver {
 			Solver sol = new Solver(cube);
 			sol.solve();
 			cube.printCube();
-			if (!(cube.topSolved() && cube.middleSolved()))
+			if (!(cube.topSolved() && cube.middleSolved()&& (cube.greenCrossState() == 8)))
 				break;
 			totalTurns += cube.getTurnCount();
 		}
-		if (!(cube.topSolved() && cube.middleSolved())){
+		if (!(cube.topSolved() && cube.middleSolved() && (cube.greenCrossState() == 8))){
 			System.out.println("Failed to solve!");
 		} else {
 			System.out.println("Finished! No problems.");
 			System.out.println("Scrambles solved: " + scrambles);
-			System.out.println("Average amt. of turns to solve the top and middle layer: " + totalTurns/scrambles);
+			System.out.println("Average amt. of turns to solve the top and middle layer and green cross: " + totalTurns/scrambles);
 		}
 	}
 

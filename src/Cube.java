@@ -964,5 +964,27 @@ public class Cube {
 			return 0;
 	}
 	
+	public int greenCornerPosition(){
+		
+		boolean yo = (translateColor(bottomRight(yellow)) & translateColor(bottomLeft(orange)) & translateColor(topRight(green))) == (y & o & g);
+		boolean ow = (translateColor(bottomRight(orange)) & translateColor(bottomLeft(white)) & translateColor(bottomRight(green))) == (o & w & g);
+		boolean wr = (translateColor(bottomRight(white)) & translateColor(bottomLeft(red)) & translateColor(bottomLeft(green))) == (w & r & g);
+		boolean ry = (translateColor(bottomRight(red)) & translateColor(bottomLeft(yellow)) & translateColor(topLeft(green))) == (r & y & g);
+		
+		if (yo && ow && wr && ry)
+			return 5;
+		else if (yo)
+			return 1;
+		else if (ow)
+			return 2;
+		else if (wr)
+			return 3;
+		else if (ry)
+			return 4;
+		else
+			return 0;
+		
+	}
+	
 	
 }
