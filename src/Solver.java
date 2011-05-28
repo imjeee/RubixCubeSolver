@@ -173,56 +173,92 @@ public class Solver {
 			cube.turnMiddle(true);
 		}
 	}
-
-/*	private void solveMiddleLayer(){
-		solveYellowOrange();
+	
+	
+	
+	private void solveBottomLayer() throws Exception{
+		solveTopGreenCross();
+		solveCrossIncludingSide();
 	}
 	
-	private void solveYellowOrange() {
+	private void solveCrossIncludingSide() throws Exception {
 		
-		int[][] yellowOrange = {
-				{}, // bw
-				{}, // br
-				{}, // by
-				{}, // bo
-				
-				{}, // yb
-				{ym,gp,yp,rm,yp,rp,ym,gp,gp,		om,gp,op,ym,op,yp,om}, // yr//ow
-				{gm,								om,gp,op,ym,op,yp,om}, // yg/gw
-				{}, // yo
-				
-				{}, // ob
-				{om,gp,op,ym,op,yp,om,gp,			om,gp,op,ym,op,yp,om}, // oy/wg
-				{gp,gp,								om,gp,op,ym,op,yp,om}, // og///
-				{wm,gp,wp,om,wp,op,wm,gm,			yp,gm,ym,op,ym,om,yp}, // ow/gy
-				
-				{}, // wb
-				{wm,gp,wp,om,wp,op,wm,				om,gp,op,ym,op,yp,om}, // wo/yr
-				{gp,								om,gp,op,ym,op,yp,om}, // wg///
-				{rm,gp,rp,wm,rp,wp,rm,gp,gp,		yp,gm,ym,op,ym,om,yp}, // wr/gr
-				
-				{}, // rb
-				{rm,gp,rp,wm,rp,wp,rm,gm,			om,gp,op,ym,op,yp,om}, // rw/
-				{									om,gp,op,ym,op,yp,om}, // rg/
-				{ym,gp,yp,rm,yp,rp,ym,gp,			yp,gm,ym,op,ym,om,yp}, // ry/rw
-				
-				{gp,gp,								yp,gm,ym,op,ym,om,yp}, // gy
-				{gm,								yp,gm,ym,op,ym,om,yp}, // gr
-				{									yp,gm,ym,op,ym,om,yp}, // gw
-				{gp,								yp,gm,ym,op,ym,om,yp}  // go
+		int[][]turns = {
+				{   wp,gp,wm,gp,wp,gp,gp,wm,	gp},
+				{   wp,gp,wm,gp,wp,gp,gp,wm},
+				{   wp,gp,wm,gp,wp,gp,gp,wm, gm},
+				{   wp,gp,wm,gp,wp,gp,gp,wm,	gp,gp},
+				{gm,wp,gp,wm,gp,wp,gp,gp,wm, 		gm},
+				{gm,wp,gp,wm,gp,wp,gp,gp,wm,		gm}
+				/*
+				 * int c1= bottomMid(white);
+			int c2 = bottomMid(orange);
+			int c3 = bottomMid(yellow);
+			int c4 = bottomMid(red);
+				 * if(c1 == 'w' & c2 == 'o'){
+				state = 0;
+			} else if(c1 == 'o' & c2 == 'y'){
+				state = 1;
+			} else if(c1 == 'y' & c2 == 'r'){
+				state = 2;
+			} else if(c1 == 'r' & c2 == 'w'){
+				state = 3;
+			} else if(c1 == 'w' & c3 == 'y'){
+				state = 4;
+			} else if(c1 == 'o' & c3 == 'r'){
+				state = 5;
+			}
+				 */
 		};
-		cube.performMoves(yellowOrange[cube.findSide(y, o)]);
 		
-	}*/
-	
-	
-	
-	private void solveBottomLayer(){
+		while(cube.find2CorrectGreen() != 6){
+			trace("correct green state is " + cube.find2CorrectGreen());
+			cube.performMoves(turns[cube.find2CorrectGreen()]);
+		}		
+	}
+
+	private void solveTopGreenCross(){
+		//trace("solving bottom");
+		
+		int[][] turns = {
+				{wp,op,gp,om,gm,wm},	//xxx 0
+										//xgx
+										//xxx			
+				{gm},				//xgx 1
+									//xgg
+									//xxx			
+				{gm,gm},		//xxx 2
+								//xgg
+								//xgx			
+				{gp},				//xxx 3
+									//ggx
+									//xgx			
+				{wp,op,gp,om,gm,wm},		//xgx 4
+											//ggx
+											//xxx			
+				{gp},				//xgx 5
+									//xgx
+									//xgx			
+				{wp,op,gp,om,gm,wm},		//xxx 6
+											//ggg
+											//xxx		
+				{wp,op,gp,om,gm,wm},	//xgx 7
+										//ggg
+										//xgx
+				{op,gp,om,gp,op,gp,gp,om}	//8
+		};
+				
+		while(cube.greenCrossState() != 7){
+			//trace(cube.greenCrossState());
+			cube.performMoves(turns[cube.greenCrossState()]);
+		}
 		
 	}
-	
-	
-	
-	
-	
+
+	private void trace(String s) {
+		System.out.println(s);
+	}
+	private void trace(int s){
+		System.out.println(s);
+	}
 }

@@ -876,7 +876,45 @@ public class Cube {
 		return rightMid(red) == 'r' && leftMid(yellow) == 'y';
 	}
 	
-	
+	public int find2CorrectGreen() throws Exception{
+		int state = -1;
+		boolean m = false;
+		while(!m){
+			
+			System.out.println("print cube");
+			printCube();
+			
+			int c1= bottomMid(white);
+			int c2 = bottomMid(orange);
+			int c3 = bottomMid(yellow);
+			int c4 = bottomMid(red);
+			
+			if(c1 == 'w' & c2 == 'o'){
+				state = 0;
+			} else if(c1 == 'o' & c2 == 'y'){
+				state = 1;
+			} else if(c1 == 'y' & c2 == 'r'){
+				state = 2;
+			} else if(c1 == 'r' & c2 == 'w'){
+				state = 3;
+			} else if(c1 == 'w' & c3 == 'y'){
+				state = 4;
+			} else if(c1 == 'o' & c3 == 'r'){
+				state = 5;
+			}
+			
+			if(c1 == 'w' & c2 == 'o' & c3 == 'y' & c4 == 'r'){
+				state = 6;
+			}
+			
+			if(state != -1){
+				m = true;
+			} else {
+				turnGreen(true);
+			}
+		}
+		return state;
+	}
 	
 	public int greenCrossState(){
 		int state = 0;
@@ -924,8 +962,6 @@ public class Cube {
 			return 1;
 		else
 			return 0;
-		
-		
 	}
 	
 	

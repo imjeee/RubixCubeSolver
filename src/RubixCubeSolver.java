@@ -54,10 +54,10 @@ public class RubixCubeSolver {
 
 		cube.checkIntegrity();
 		
-		do {
+		//do {
 			testSolver(cube, 1);
-		} while (cube.greenCrossState() != 8);
-		System.out.println("Cross state: " + cube.greenCrossState());
+		//} while (cube.greenCrossState() != 8);
+		//System.out.println("Cross state: " + cube.greenCrossState());
 		
 
 	}
