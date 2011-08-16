@@ -72,8 +72,6 @@ public class RubixCubeSolver {
 		System.out.println();
 		System.out.println("Moves to solve: ");
 		cube.printMoves(25, 5);
-		
-
 	}
 
 
@@ -100,9 +98,6 @@ public class RubixCubeSolver {
 		}
 	}
 
-
-
-
 	// parse config file with StringTokenizer
 	private static void build(String line, Cube cube) {
 
@@ -122,10 +117,4 @@ public class RubixCubeSolver {
 		}
 		
 	}
-
-
-
-	
-	
-
 }
