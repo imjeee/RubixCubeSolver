@@ -7,7 +7,8 @@ import java.util.Iterator;
 
 public class Cube {
 	
-	private static String[] turns = {"F+", "B+", "L+", "R+", "U+", "D+", "M+", "F-", "B-", "L-", "R-", "U-", "D-", "M-"};
+	private static String[] turns = {"yel+", "whi+", "red+", "ora+", "blu+", "gre+", "MID+", 
+									 "yel-", "whi-", "red-", "ora-", "blu-", "gre-", "MID-"};
 	
 	private LinkedList<Integer> moves = new LinkedList<Integer>();
 	
@@ -19,6 +20,9 @@ public class Cube {
 	private char[][] green = new char[3][3]; // green is bottom
 	private char[][] red = new char[3][3]; // red is left
 	private char[][] orange = new char[3][3]; // orange is right
+	
+	private char[][][] faceArray = {yellow, white, blue, green, red, orange};
+
 	
 	private int turnCount = 0;
 	
@@ -34,6 +38,24 @@ public class Cube {
 		outputLog.enable();
 	}
 	
+	private int getFaceInt(String f){
+		if(f.equals("yellow"))
+			return 0;
+		else if (f.equals("white"))
+			return 1;
+		else if (f.equals("blue"))
+			return 2;
+		else if (f.equals("green"))
+			return 3;
+		else if (f.equals("red"))
+			return 4;
+		else if (f.equals("orange"))
+			return 5;
+		else
+			new Exception("error determining face: " + f);
+		
+		return 10; 
+	}
 	
 	void turnYellow(boolean clockWise) throws Exception{
 		int colorNum = 0;
@@ -294,17 +316,17 @@ public class Cube {
 		for (int i = 0; i < 3; i++) {
 			if (side.equals("top"))
 				target[0][i] = source[i];
-			else if (side.equals("bottom")) {
+			else if (side.equals("bottom"))
 				target[2][i] = source[i];
-			} else if (side.equals("left")) {
+			else if (side.equals("left"))
 				target[i][0] = source[i];
-			} else if (side.equals("right")) {
+			else if (side.equals("right"))
 				target[i][2] = source[i];
-			} else if (side.equals("midrow")) {
+			else if (side.equals("midrow"))
 				target[1][i] = source[i];
-			} else {
+			else
 				throw new Exception("error determining side (replaceColor)");
-			}
+			
 		}
 	}
 	
@@ -312,17 +334,17 @@ public class Cube {
 		for (int i = 0; i < 3; i++) {
 			if (side.equals("top"))
 				target[0][2 - i] = source[i];
-			else if (side.equals("bottom")) {
+			else if (side.equals("bottom"))
 				target[2][2 - i] = source[i];
-			} else if (side.equals("left")) {
+			else if (side.equals("left"))
 				target[2 - i][0] = source[i];
-			} else if (side.equals("right")) {
+			else if (side.equals("right"))
 				target[2 - i][2] = source[i];
-			} else if (side.equals("midrow")) {
+			else if (side.equals("midrow"))
 				target[1][2-i] = source[i];
-			} else {
+			else
 				throw new Exception("error determining side (replaceColor)");
-			}
+			
 		}
 
 	}
@@ -334,17 +356,17 @@ public class Cube {
 		for (int i = 0; i < 3; i++) {
 			if (side.equals("top"))
 				result[i] = face[0][i];
-			else if (side.equals("bottom")) {
+			else if (side.equals("bottom"))
 				result[i] = face[2][i];
-			} else if (side.equals("left")) {
+			else if (side.equals("left"))
 				result[i] = face[i][0];
-			} else if (side.equals("right")) {
+			else if (side.equals("right"))
 				result[i] = face[i][2];
-			} else if (side.equals("midrow")) {
+			else if (side.equals("midrow"))
 				result[i] = face[1][i];
-			} else {
+			else
 				throw new Exception("error determining side (deepcopy)");
-			}
+			
 		}
 
 		return result;
@@ -366,31 +388,16 @@ public class Cube {
 	// build each face.
 	public void buildFace(String faceName, String colors) throws Exception {
 
-		faceName = faceName.toLowerCase();
-		
-		char[][] face;
+		String faceN = faceName.toLowerCase();
+//		int faceInt = Integer.parseInt(faceName);
+//		System.out.println(faceName);
+		//	private char[][][] faceArray = {yellow, white, blue, green, red, orange};
 
-		if (faceName.equals("white")){
-			face = white;
-		} 
-		else if (faceName.equals("blue")){
-			face = blue;
-		}
-		else if (faceName.equals("yellow")){
-			face = yellow;
-		}
-		else if (faceName.equals("red")){
-			face = red;
-		}
-		else if (faceName.equals("orange")){
-			face = orange;
-		}
-		else if (faceName.equals("green")){
-			face = green;
-		}
-		else
-			throw new Exception(faceName + " is not a valid face color.");
+		//int f = face(faceName);
+
+		char[][] face = faceArray[getFaceInt(faceN)];
 		
+		System.out.println(face);
 		
 		int ch = 0;
 

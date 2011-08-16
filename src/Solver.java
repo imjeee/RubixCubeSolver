@@ -85,14 +85,14 @@ public class Solver {
 				{gm,yp,yp}  // go
 		};
 		
-		cube.performMoves(topMidBlue[cube.findSide(b, y)]);
-		cube.turnBlue(true);
-		cube.performMoves(topMidBlue[cube.findSide(b, o)]);
-		cube.turnBlue(true);
-		cube.performMoves(topMidBlue[cube.findSide(b, w)]);
-		cube.turnBlue(true);
-		cube.performMoves(topMidBlue[cube.findSide(b, r)]);
-		cube.turnBlue(true);
+		char[] c1 = {'b','b','b','b'};
+		char[] c2 = {'y','o','w','r'};
+
+		for(int i = 0; i < 4; i++){
+			cube.performMoves(topMidBlue[cube.findSide(c1[i], c2[i])]);
+			cube.turnBlue(true);
+		}
+
 		//System.out.println("Done with the cross");
 		
 		
