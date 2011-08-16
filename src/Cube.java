@@ -10,7 +10,6 @@ public class Cube {
 	//turns is for display purposes only so a user can follow the steps the cube used to solve it.
 	//although it IS 190+ turns and jie's never able to do it.
 	//seriously?
-	//blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 	
 	private static String[] turns = {"yel+", "whi+", "red+", "ora+", "blu+", "gre+", "MID+", 
 									 "yel-", "whi-", "red-", "ora-", "blu-", "gre-", "MID-"};
